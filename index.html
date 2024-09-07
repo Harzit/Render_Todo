@@ -1,0 +1,58 @@
+<html>
+    <head>
+        <title>ToDo Application</title>
+        <link rel = "icon" href ="favicon-st.png">
+    </head>
+
+    <body>
+        <h1>To Do Application</h1>
+        <input type="text" placeholder="Enter your task">
+        <button onclick="addTask()">Add Task</button>
+        <button onclick="onDelLast()">Delete Last Task</button>
+        <button onclick="onDelFirst()">Delete First Task</button>
+
+        <div id="todos"></div>
+        <script>
+            let todos = [];
+            
+            function addTask() {
+                todos.push({
+                    title: document.querySelector("input").value
+                })
+                render();
+            }
+
+            function onDelFirst(){
+                todos.splice(0,1);
+                render();
+            }
+            
+            function onDelLast(){
+                todos.splice(todos.length-1,1);
+                render();
+            }
+
+
+            function createComponent(taska){
+                const divi = document.createElement("div");
+                const ho3 = document.createElement("h3");
+                const buttony = document.createElement("button");
+
+                ho3.textContent = taska.title;
+                buttony.innerHTML = "DELETE"
+                divi.append(ho3);
+                divi.append(buttony);
+
+                return divi;
+            }
+
+            function render(){
+                document.querySelector('#todos').innerHTML="";
+                for(let i=0; i<todos.length; ++i){
+                    const ele = createComponent(todos[i]);
+                    document.querySelector("#todos").appendChild(ele);
+                }
+            }
+        </script>
+    </body>
+</html>
